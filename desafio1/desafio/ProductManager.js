@@ -48,9 +48,9 @@ const product1 = {
     stock:25
 }
 const product2 = {
-    title: "producto prueba",
-    description:"Este es un producto prueba",
-    price:200,
+    title: "producto prueba2",
+    description:"Este es un producto prueba2",
+    price:499,
     thumbnail:"Sin imagen",
     code:"abc1233",
     stock:25
