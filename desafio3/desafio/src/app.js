@@ -19,6 +19,16 @@ app.get('/products',(req,res)=>{
         res.send(err)
     });
 })
+app.get('/products/:pid',(req, res)=>{
+    const productId = parseInt(req.params.pid)
+    manager.getProductById(productId)
+    .then((result)=>{
+        res.send(result)
+    })
+    .catch((err)=>{
+        res.send(err)
+    })
+})
 
 app.listen(8080,()=>{
     console.log("Servidor escuchando en el puerto 8080")

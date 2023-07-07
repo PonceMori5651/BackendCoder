@@ -18,47 +18,34 @@ class ProductManager{
             title: data.title,
             description: data.description,
             price: data.price,
-            thumbnail: data.thumbnail,
+            thumbnails: [],
             code:data.code,
-            stock:data.stock
+            stock:data.stock,
+            category: data.category,
+            status: true
         }
-        if(!data.title || !data.description || !data.price || !data.thumbnail || !data.code || !data.stock){
-            console.error("Todos los campos son requeridos")
-            return
+        if(!data.title || !data.description || !data.price || !data.status || !data.code || !data.stock || !data.category){
+            return true
         }
         return this.getProducts()
         .then((result) => {
-            const existCode = result.findIndex(el=>el.code === data.code)
-            if(existCode!==-1){
-                console.error("Code ya registrado anteriormente")
-                return 1
-            }
             newProduct.id = result.length +1
             result.push(newProduct)
             const stringArray = JSON.stringify(result,null,2)
             return fs.promises.writeFile(this.path,stringArray)
         })
-        .then((rt)=>{
-            if(rt===1){
-                return
-            }
-            console.log("El producto se agrego correctamente")
-            return
-        })
         .catch(() => {
             const array = [newProduct]
             const stringArray = JSON.stringify(array,null,2)
             return fs.promises.writeFile(this.path,stringArray)
-            .then(() => {
-                console.log("Archivo creado / el producto se agrego correctamente")
-                return
-            }).catch((err) => {
+            .catch((err) => {
                 console.error({err})
                 throw err
             });
         });
 
     }
+
     getProductById (idProduct) {
         return this.getProducts()
         .then((result) => {
@@ -80,20 +67,16 @@ class ProductManager{
                 console.error("No se encontro el Id del producto a actualizar")
                 return -1
             }
-            result[findId].title = obj.title
-            result[findId].description = obj.description
-            result[findId].price = obj.price
-            result[findId].thumbnail = obj.thumbnail
-            result[findId].code = obj.code
-            result[findId].stock = obj.stock
+            result[findId].title = obj.title || result[findId].title
+            result[findId].description = obj.description || result[findId].description
+            result[findId].price = obj.price || result[findId].price
+            result[findId].thumbnails = obj.thumbnails || result[findId].thumbnails
+            result[findId].code = obj.code || result[findId].code
+            result[findId].stock = obj.stock || result[findId].stock
+            result[findId].status = obj.status || result[findId].status
+            result[findId].category = obj.category || result[findId].category
             const stringArray = JSON.stringify(result,null,2)
-            return fs.promises.writeFile(this.path,stringArray)
-        }).then((rt)=>{
-            if(rt===-1){
-                return
-            }
-            console.log("Se actualizo correctamente el producto")
-            return
+            return fs.promises.writeFile(this.path,stringArray),result[findId]
         })
         .catch((err) => {
             console.error(err)
@@ -123,4 +106,5 @@ class ProductManager{
         });
     }
 }
+
 module.exports = ProductManager

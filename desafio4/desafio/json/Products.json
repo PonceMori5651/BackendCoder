@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "title": "televisor",
+    "description": "televisor ultimo modelo",
+    "price": 2600,
+    "thumbnails": [],
+    "code": "abc123",
+    "stock": 48,
+    "category": "tecnologia",
+    "status": true
+  }
+]
