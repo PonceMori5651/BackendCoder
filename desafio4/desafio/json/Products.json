@@ -9,5 +9,16 @@
     "stock": 48,
     "category": "tecnologia",
     "status": true
+  },
+  {
+    "id": 2,
+    "title": "Celular iphone",
+    "description": "celular iphone ultimo modelo",
+    "price": 4600,
+    "thumbnails": [],
+    "code": "abc1234",
+    "stock": 24,
+    "category": "tecnologia",
+    "status": true
   }
 ]

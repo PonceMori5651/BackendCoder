@@ -51,7 +51,7 @@ class ProductManager{
         .then((result) => {
             const findId = result.findIndex(el=>el.id===idProduct)
             if(findId===-1){
-                return []
+                return -1
             }
             return result[findId]
         }).catch((err) => {
@@ -88,17 +88,11 @@ class ProductManager{
         .then((result) => {
             const findId = result.findIndex(el=>el.id===idProduct)
             if(findId===-1){
-                console.error("No se encontro el Id del producto a eliminar")
                 return -1
             }
             result.splice(findId,1)
             const stringArray = JSON.stringify(result,null,2)
             return fs.promises.writeFile(this.path,stringArray)
-        }).then((rt)=>{
-            if(rt===-1){
-                return
-            }
-            console.log("Producto eliminado correctamente")
         })
         .catch((err) => {
             console.error(err)

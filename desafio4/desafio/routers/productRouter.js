@@ -1,7 +1,6 @@
-
 const {Router} = require('express')
 const productRouter = Router();
-const ProductManager = require('../src/ProductManager');
+const ProductManager = require('../src/ProductManager')
 const manager = new ProductManager('./json/Products.json')
 
 productRouter.get('/',(req, res)=>{
@@ -27,7 +26,7 @@ productRouter.get('/:pId',(req, res)=>{
     }
     manager.getProductById(productId)
     .then((result) => {
-        if(result.length === 0){
+        if(result === -1){
             return res.status(404).json({
                 "error": "Not Found Product"
             })
@@ -59,6 +58,11 @@ productRouter.put('/:pId',(req, res)=>{
     const updproduct = req.body
     manager.updateProduct(productId,updproduct)
     .then((result) => {
+        if(result===-1){
+            return res.status(404).json({
+                "err":"No se encontro el Id del producto a actualizar"
+            })
+        }
         res.status(201).json(result)
     }).catch((err) => {
         res.status(404).json(err)
@@ -67,15 +71,22 @@ productRouter.put('/:pId',(req, res)=>{
 
 productRouter.delete('/:pId',(req, res)=>{
     const productId = parseInt(req.params.pId)
-    const findproductIndex = products.findIndex(el =>el.id ===productId)
-    if(findproductIndex===-1){
+    if(!productId){
         return res.status(404).json({
-            "error": "product Not Found"
+            "error": "Ingrese un Id de producto valido"
         })
     }
-
-    products.splice(findproductIndex,1)
-    res.status(204).json({})
+    manager.deleteProduct(productId)
+    .then((result) => {
+        if(result===-1){
+            return res.status(404).json({
+                "error": "Not Found Product"
+            })
+        }
+        res.status(204).json({})
+    }).catch((err) => {
+        res.status(404).json(err)
+    });
 })
 
 
