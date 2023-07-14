@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/api/products" method="post">
+        <label for="title">Titulo</label>
+        <input type="text" name="title"><br>
+        <label for="description">Descripcion</label>
+        <input type="text" name="description"><br>
+        <label for="price">Precio</label>
+        <input type="number" name="price"><br>
+        <select name="category" id="category">
+            <option value="tecnologia">Tecnologia</option>
+            <option value="electrodomestico">Electrodomestico</option>
+        </select><br>
+        <label for="code">Código</label>
+        <input type="text" name="code"><br>
+        <label for="stock">Stock</label>
+        <input type="number" name="stock"><br>
+        <label for="file">Imagen</label>
+        <input type="file" name="file"><br>
+        <input type="submit" value="ENVIAR">
+    </form>
+</body>
+</html>
