@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "title": "PC GAMER",
+    "description": "GAMA ALTA",
+    "price": "2800",
+    "thumbnails": [],
+    "code": "PCGA58",
+    "stock": "48",
+    "category": "Tecnologia",
+    "status": true
+  },
+  {
+    "id": 2,
+    "title": "safa",
+    "description": "asfasf",
+    "price": "32",
+    "thumbnails": [
+      "Computadora-PC.png"
+    ],
+    "code": "safa",
+    "stock": "12",
+    "category": "safa",
+    "status": true
+  },
+  {
+    "id": 3,
+    "title": "safa",
+    "description": "asfasf",
+    "price": "32",
+    "thumbnails": [
+      "Computadora-PC.png"
+    ],
+    "code": "safa",
+    "stock": "12",
+    "category": "safa",
+    "status": true
+  },
+  {
+    "id": 4,
+    "title": "safa",
+    "description": "asfasf",
+    "price": "32",
+    "thumbnails": [
+      "Computadora-PC.png"
+    ],
+    "code": "safa",
+    "stock": "12",
+    "category": "safa",
+    "status": true
+  }
+]
