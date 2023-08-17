@@ -1,7 +1,7 @@
 const fs = require('fs')
 class ProductManager{
-    constructor(path){
-        this.path=path
+    constructor(){
+        this.productModel = productModel
     }
     getProducts (){
         return fs.promises.readFile(this.path,'utf-8')
@@ -33,12 +33,18 @@ class ProductManager{
             newProduct.thumbnails.push(data.thumbnails)
             result.push(newProduct)
             const stringArray = JSON.stringify(result,null,2)
-            return fs.promises.writeFile(this.path,stringArray)
+            return fs.promises.writeFile(this.path,stringArray),newProduct
+        })
+        .then((result)=>{
+            return result
         })
         .catch(() => {
             const array = [newProduct]
             const stringArray = JSON.stringify(array,null,2)
-            return fs.promises.writeFile(this.path,stringArray)
+            return fs.promises.writeFile(this.path,stringArray),newProduct
+            .then((result)=>{
+                return result
+            })
             .catch((err) => {
                 console.error({err})
                 throw err

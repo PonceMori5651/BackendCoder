@@ -4,13 +4,13 @@ const {Router} = require('express')
 const viewRouterFn = (io)=>{
     const viewRouter = Router()
     const uploader = require('../utils')
-    const ProductManager = require('../src/ProductManager')
+    const ProductManager = require('../Dao/ProductManager')
     const manager = new ProductManager('./json/Products.json')
 
     viewRouter.get('/products',(req, res)=>{
         const params = {
             titleP: 'ViewRouter',
-            nombre: 'AARON'
+            nombre: 'Aarón'
         }
         res.render('productForm',params)
     })
@@ -35,20 +35,20 @@ const viewRouterFn = (io)=>{
         });
     })
 
-    viewRouter.post('/realtimeproducts',uploader.single('thumbnails'),(req, res)=>{
+    viewRouter.post('/realtimeproducts',uploader.single('thumbnails'),async (req, res)=>{
         const obj = req.body
-        console.log("nombre del archivo : "+req.file.originalname)
-        obj.thumbnails = req.file.originalname
-        console.log({obj})
-        const valor = manager.addProduct(obj)
+        //console.log("nombre del archivo : "+req.file.originalname)
+        //obj.thumbnails = req.file.originalname
+        const valor = await manager.addProduct(obj)
         if(valor===true){
             params = {
                 err: 'Llenar todos los campos obligatorios'
             }
             return res.render('error',params)
         }
-        io.emit('newProduct',JSON.stringify(obj))
-        res.status(201).json(obj)
+        console.log(valor)
+        io.emit('newProduct',JSON.stringify(valor))
+        res.redirect(`/realtimeproducts?product=${obj.title}`)
     })
     return viewRouter
 }

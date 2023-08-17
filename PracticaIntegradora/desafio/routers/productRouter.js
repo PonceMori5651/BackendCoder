@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const productRouter = Router();
 const uploader = require('../utils')
-const ProductManager = require('../src/ProductManager')
+const ProductManager = require('../Dao/managerMongo/ProductManager')
 const manager = new ProductManager('./json/Products.json')
 
 productRouter.get('/',(req, res)=>{
@@ -40,8 +40,8 @@ productRouter.get('/:pId',(req, res)=>{
 
 productRouter.post('/',uploader.single('thumbnails'),(req, res)=>{
     const obj = req.body
-    console.log("nombre del archivo : "+req.file.originalname)
-    obj.thumbnails = req.file.originalname
+    //console.log("nombre del archivo : "+req.file.originalname)
+    //obj.thumbnails = req.file.originalname
     console.log({obj})
     const valor = manager.addProduct(obj)
     if(valor===true){

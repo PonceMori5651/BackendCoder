@@ -15,6 +15,6 @@ socket.on('newProduct', (data) => {
   </tr>`
 
   const table = document.getElementById('products')
-  table.append(productHTML)
+  table.innerHTML+=productHTML
 });
 
